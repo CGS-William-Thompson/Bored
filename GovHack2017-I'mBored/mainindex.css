@@ -1,0 +1,135 @@
+body {
+	background-color: lightgray;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#off {
+	float: right;
+	padding: 3px;
+	border: 1px solid black;
+	background-color: orange;
+	cursor: pointer;
+}
+
+#popup:hover{
+	box-shadow: 0px 11px 0px 0px #122222;
+	background-color: #ce0a0a;
+}
+
+#popup:active {
+	box-shadow: none;
+	box-shadow: 0px 6px 0px 0px #122222;
+}
+
+
+
+.hidden {
+	visibility: hidden;
+}
+
+#buttonSection {
+	position: relative;
+	margin: auto;
+	width:100%;
+	text-align:center;
+}
+
+
+#popup {
+	width: 500px;
+	height: 500px;
+	border-radius: 250px;
+	background-color: red;
+	text-align: center;
+    position: relative;
+    display: inline-block;
+    user-select: none;
+	box-shadow: 0px 11px 0px 0px #122222;
+}
+
+/* The actual popup */
+#popup #popuptext {
+	margin: auto;
+    visibility: hidden;
+    width: 700px;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: -40%;
+    left: 10%;
+    margin-left: -150px;
+}
+
+ /*Toggle*/
+#popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+ 
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1;}
+}
+
+img {
+	padding: 10px;
+}
+
+
+
+
+
+#bigText {
+	font-weight: bold;
+	font-size: 40px;
+}
+
+@media only screen and (max-width: 730px) {
+   	#popup #popuptext {
+        width: 500px;
+    }
+	#popup {
+		height: 300px;
+		width: 300px;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+    #popup #popuptext {
+        width: 400px;
+		position: absolute;
+		left: 0%;
+		bottom: -500%;
+		font-size: 20px;
+    }
+	#popup {
+		height: 250px;
+		width: 250px;
+	}
+	
+	#map {
+		height: 400px;
+    	width: 100%;
+	}	
+	
+	#bigText {
+		font-size: 30px;
+	}
+}
+
+#map {
+	height: 600px;
+	width: 85%;
+	margin: auto;
+}

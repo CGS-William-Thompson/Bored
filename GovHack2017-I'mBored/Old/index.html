@@ -1,0 +1,145 @@
+<!-- 
+   //This 'webapp' is created by: William Thompson; Adi.Soetanto; Cooper Levinge; Kwame Nketia;  as a part of GOVHACK2017 project
+   -->
+<!DOCTYPE html>
+<html>
+
+   <head>
+
+      <title>I'm Bored</title>
+
+      <link rel="shortcut icon" href="images/bored.png" />
+      <link rel="stylesheet" type="text/css" href="mainindex.css" />
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+   </head>
+
+   <body onload="init()">
+
+      <div id="buttonSection">
+         <button id="popup" onclick="buttoneClicked()">
+            <span id="bigText">I'm Bored</span>
+            <div id="popuptext">
+               <span id="off" onclick="setTimeout(off, 100)">X</span>
+               <p>Location: Canberra <br> 
+                  How many activities: 3
+               </p>
+               <div id="map"></div>
+               List of activities: <br>
+               Old parliment house <br>
+               National Museum of Australia <br>
+               Australian War Memorial<br>
+            </div>
+         </button>
+      </div>
+
+      
+<script type="text/javascript"> 		
+
+			  var title = ["1984", "Cystic Fibrosis ACT's Santa Speedo Shuffle", "Dress Code: Empire", "Facing Two Fronts: The Fight for Respect", "Hannah Quinlivan Anatomy of a Drawing", "People and Places - paintings & works on paper by Graham Fransella", "Pialligo Estate Farm Gate Markets", "Platypus Pursuits"];
+			  var description = ["April, 1984. 13:00. Comrade 6079, Winston Smith, t…ding a sold-out season at the Melbourne Festival.", "It’s beginning to feel a lot like Christmas in Jul…er 12s. Visit their website for more information.", "Dress Code: Empire. An old coat rescued. Sir Edmun…igital interactive, videos and school activities.", "How did war become a platform for advocating the c…re information or to book a free exhibition tour.", "The artist uses the glass-walled space of Gallery …l understanding of what can constitute a drawing.", "Renowned artist Graham Fransella’s new works Peopl… Trustees Watercolour Prize on several occasions.", "It’s Market Day at Pialligo Estate Farm Gate!↵↵Hea…ut the day, there will be something for everyone.", "Take a Sunday walk with a wildlife ranger through …the other remarkable inhabitants of the wetlands."];
+			  var duration = [360, 240, 480, 480, 300, 480, 360, 30];
+			  var eventsaddress = ["Canberra Theatre Centre Civic Square, London Circuit Canberra City Canberra City ACT 2601", "Southern Cross Yacht Club Mariner Place Yarralumla Yarralumla ACT 2600", "Old Parliament House King George Terrace Parkes Parkes ACT 2600", "National Archives of Australia Queen Victoria Terrace Parkes Parkes ACT 2600", "Canberra Museum and Gallery 176 London Circuit Canberra ACT 2601", "Beaver Galleries 81 Denison Street Deakin Deakin ACT 2600", "Pialligo Estate 18 Kallaroo Road Pialligo Pialligo ACT 2609", "Tidbinbilla Nature Reserve Paddys River Road Paddys River Paddys River ACT 2620"]; 
+			  var eventlat = [];
+			  var eventlon = [];
+			  var url = ["http://www.events.act.gov.au/component/events/56b23c36266140594567eba9/aviary?Itemid=320",  "http://www.events.act.gov.au/component/events/5970560e1886d3db60a4965c/cystic-fibrosis-act-s-santa-speedo-shuffle?Itemid=320", "http://www.events.act.gov.au/component/events/57bd39be0a747c610e667044/dress-code-empire?Itemid=320", "http://www.events.act.gov.au/component/events/58bf77628ae46dee71cd047b/facing-two-fronts-the-fight-for-respect?Itemid=320", "http://www.events.act.gov.au/component/events/57218d76573b89284c406db7/hannah-quinlivan-anatomy-of-a-drawing?Itemid=320", "http://www.events.act.gov.au/component/events/59659337f5e955d24eb8ee46/people-and-places-paintings-works-on-paper-by-graham-fransella?Itemid=320", "http://www.events.act.gov.au/component/events/596c4571d1b0967f5ee5a7dd/pialligo-estate-farm-gate-markets?Itemid=320", "http://www.events.act.gov.au/component/events/56b23bc8b042386245d433a9/platypus-pursuits?Itemid=320"];
+
+
+		      var map, infoWindow, geocoder;
+		      var eventMarker = [];
+
+		      function myMap() {
+
+		      	var geocoder = new google.maps.Geocoder();
+
+		        map = new google.maps.Map(document.getElementById('map'), {
+		          center: {lat: -35.295132, lng: 149.136829},
+		          zoom: 15
+		        });
+		        infoWindow = new google.maps.InfoWindow;
+
+		        if (navigator.geolocation) {
+
+		          navigator.geolocation.getCurrentPosition(function(position) {
+		            var pos = {
+		              lat: position.coords.latitude,
+		              lng: position.coords.longitude
+		            };
+
+		            infoWindow.setPosition(pos);
+		            infoWindow.setContent('Your location');
+		            infoWindow.open(map);
+		            map.setCenter(pos);
+		          });
+		        } else {
+		          console.log("Turn on geolocation navigator");
+		        }
+
+
+		        for (var i = 0; i < eventsaddress.length; i++) {
+
+					geocoder.geocode( { 'address': eventsaddress[i]}, function(results, status) {
+
+						if (status == google.maps.GeocoderStatus.OK) {
+							eventlat.push(results[0].geometry.location.lat());
+							eventlon.push(results[0].geometry.location.lng());					    
+					 	} 
+
+					}); 		        	
+
+		        }
+
+		        for (var i = 0; i < eventlat.length; i++) {
+
+		        	var latlng = {
+		        		lat: eventlat[i],
+		        		lng: eventlon[i]
+		        	};
+					
+					
+					
+					var marker = new google.maps.Marker({
+            position: event1,
+            map: map
+         });
+         marker = new google.maps.Marker({
+            position: event2,
+            map: map
+         });
+         marker = new google.maps.Marker({
+position: event3,
+map: map
+
+			 });
+         
+		        	var markerHolder = new google.maps.Marker({
+          				position: latlng,
+          				animation: google.maps.Animation.BOUNCE
+        			});
+					
+					var marker = new google.maps.Marker({
+            			position: event1,
+            			map: map
+         			});
+
+		        	eventMarker.push(markerHolder);
+
+		        	eventMarker[i].setMap(map);
+
+		        }
+
+
+			  }
+	
+		      			
+
+			</script>
+  
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnM5do56z_1KRNNvLqW2P9MPI_6vCoF4A&callback=myMap"></script>
+
+      <script type="text/javascript" src="page_functionality.js"></script>
+
+   </body>
+   
+</html>
